@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events Calendar</title>
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+#calendar {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.controls .control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  background-color: #444;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+.controls button:hover {
+  background-color: #555;
+}
+
+.controls button.inactive {
+  background-color: #888;
+  opacity: 0.5;
+}
+
+.month-name {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.calendar-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, auto);
+  gap: 1px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow-y: auto;
+  height: 70vh;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  height: 100px;
+  font-size: auto;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.day:hover {
+  background-color: #e1e1e1;
+}
+
+.current-day {
+  background-color: #ffcc00;
+  font-weight: bold;
+}
+
+.event {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background-color: rgba(0, 150, 255, 0.7);
+  color: white;
+  font-size: 1.5vw;
+  padding: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event:hover {
+  background-color: rgba(0, 150, 255, 1);
+}
+
+.event-info-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 0;
+  border-radius: 5px;
+}
+
+.event-info {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 900px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: row;
+}
+
+.event-details {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.event-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.event-details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.event-details .get-tickets {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  display: none;
+}
+
+.event-details .get-tickets:hover {
+  background-color: #218838;
+}
+
+.event-details .close-popup {
+  padding: 10px 20px;
+  background-color: #5e5e5e;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  align-self: baseline;
+  margin-top: 60%;
+  border-radius: 5px;
+  font-size: 16px;
+  
+}
+
+.event-details .close-popup:hover {
+  background-color: #4d4d4d;
+}
+
+iframe {
+  width: 450px;
+  height: 450px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Mobile support */
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .controls .control-group {
+    
+    align-items: flex-start;
+  }
+
+  .search-bar {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 0;
+  border-radius: 5px;
+  align-self:auto;
+  margin-left: auto;
+}
+
+  .month-name {
+    font-size: 20px;
+  }
+
+
+
+  .day {
+    font-size: 14px;
+    height: 80px;
+    padding: 8px;
+  }
+
+  .event {
+    font-size: 1.5vw;
+    padding: 2px;
+  }
+
+  .event-info {
+    width: 100%;
+    max-width: 95%;
+    height: 90%;
+    flex-direction: column;
+  }
+
+  iframe {
+    width: 100%;
+    height: 350px;
+  }
+
+  .event-details {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .event-details .get-tickets {
+    width: 100%;
+  }
+
+  .event-details .close-popup {
+  padding: 10px 20px;
+  background-color: #5e5e5e;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  align-self: baseline;
+  margin-top: 5%;
+  border-radius: 5px;
+  font-size: 16px;
+  
+}
+
+.event-details .close-popup:hover {
+  background-color: #4d4d4d;
+}
+}
+
+/* For smaller screens like smartphones */
+@media (max-width: 480px) {
+  .controls button {
+    flex-direction: column;
+    padding: 8px 15px;
+  }
+
+  .controls .control-group {
+    width: 100%;
+  }
+
+  .search-bar {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 0;
+  border-radius: 5px;
+  align-self:auto;
+  margin-left: auto;
+}
+
+
+
+  .day {
+    font-size: 12px;
+    height: 60px;
+    width: 80px;
+    padding: 0px;
+  }
+
+  .event {
+    margin: 0;
+    font-size: 10px;
+    padding: 0px;
+  }
+  
+
+  .event-info {
+    width: 100%;
+    height: 90%;
+    flex-direction: column;
+  }
+
+  iframe {
+    width: 100%;
+    height: 350px;
+  }
+
+  .event-details {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .event-details .get-tickets {
+    width: 100%;
+  }
+  .event-details .close-popup {
+  padding: 10px 20px;
+  background-color: #5e5e5e;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  align-self: baseline;
+  margin-top: 5%;
+  border-radius: 5px;
+  font-size: 16px;
+  
+}
+
+.event-details .close-popup:hover {
+  background-color: #4d4d4d;
+}
+}
+
+
+
+  </style>
+</head>
+<body>
+  <div id="calendar">
+    <div class="controls">
+      <div class="control-group">
+        <button onclick="changeDate(-1)">&#8592; Prev</button>
+        <div id="month-name" class="month-name"></div>
+        <button onclick="changeDate(1)">Next &#8594;</button>
+      </div>
+      <div class="control-group">
+        <input type="text" id="search" class="search-bar" placeholder="Search for events..." oninput="searchEvents(event)" />
+      </div>
+    </div>
+    <div class="calendar-container" id="calendar-container"></div>
+  </div>
+
+  <div class="event-info-modal" id="event-info-modal">
+    <div class="event-info">
+      <div class="event-details">
+        <h2 id="event-title"></h2>
+        <p id="event-hosted-by"></p>
+        <p id="event-date-time"></p>
+        <p id="event-description"></p>
+        <button id="get-tickets" class="get-tickets" onclick="getTickets()">Get Tickets</button>
+        <button id="closepop" class="close-popup" onclick="hideEventInfo()">Close</button>
+      </div>
+      <iframe id="stadium-iframe" src=""></iframe>
+    </div>
+  </div>
+
+  <script>
+const eventsData = [
+  {
+    "event_id": "1",
+    "event_name": "Skyview vs Jacksonville",
+    "hosted_by": "Cache county school district",
+    "event_date": "2024-12-14",
+    "event_time": "5:00 PM",
+    "event_description": "The basketball game featuring the teams Skyview and Jacksonville!",
+    "seating": {
+      "section_A": {
+        "seats": 100,
+        "max_seats": 150
+      },
+      "section_B": {
+        "seats": 120,
+        "max_seats": 150
+      },
+      "section_C": {
+        "seats": 80,
+        "max_seats": 120
+      },
+      "section_D": {
+        "seats": 90,
+        "max_seats": 120
+      },
+      "section_E": {
+        "seats": 110,
+        "max_seats": 150
+      },
+      "section_F": {
+        "seats": 95,
+        "max_seats": 130
+      },
+      "section_G": {
+        "seats": 70,
+        "max_seats": 100
+      },
+      "section_H": {
+        "seats": 60,
+        "max_seats": 80
+      }
+    }
+  },
+  {
+    "event_id": "2",
+    "event_name": "Chistmas Eve Concert",
+    "hosted_by": "SomeCompany inc.",
+    "event_date": "2024-12-24",
+    "event_time": "12:00 PM",
+    "event_description": "A concert featuring covers of popular singers such as Frank Sinatra, Michael Bublé and more!",
+    "seating": {
+      "section_A": {
+        "seats": 100,
+        "max_seats": 150
+      },
+      "section_B": {
+        "seats": 120,
+        "max_seats": 150
+      },
+      "section_C": {
+        "seats": 80,
+        "max_seats": 120
+      },
+      "section_D": {
+        "seats": 90,
+        "max_seats": 120
+      },
+      "section_E": {
+        "seats": 110,
+        "max_seats": 150
+      },
+      "section_F": {
+        "seats": 95,
+        "max_seats": 130
+      },
+      "section_G": {
+        "seats": 70,
+        "max_seats": 100
+      },
+      "section_H": {
+        "seats": 60,
+        "max_seats": 80
+      }
+    }
+  }
+];
+
+
+
+    
+    let currentDate = new Date();
+    let currentView = 'month'; // default view
+
+    function createCalendar(year, month, view = 'month') {
+      const calendarElement = document.getElementById("calendar-container");
+      const monthNameElement = document.getElementById("month-name");
+      calendarElement.innerHTML = '';
+
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const monthName = monthNames[month];
+      monthNameElement.textContent = `${monthName} ${year}`;
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+
+      // Create the days of the week headers
+      const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      daysOfWeek.forEach(day => {
+        const dayHeader = document.createElement("div");
+        dayHeader.classList.add("day");
+        dayHeader.textContent = day;
+        calendarElement.appendChild(dayHeader);
+      });
+
+      // Empty spaces for the first week
+      for (let i = 0; i < firstDay; i++) {
+        const emptyDay = document.createElement("div");
+        calendarElement.appendChild(emptyDay);
+      }
+
+      // Create day cells
+      let daysToShow = [];
+
+      if (view === 'month') {
+        daysToShow = Array.from({ length: totalDays }, (_, i) => i + 1);
+      } else if (view === 'week') {
+        const startOfWeek = currentDate.getDate() - currentDate.getDay();
+        const endOfWeek = startOfWeek + 6;
+        daysToShow = Array.from({ length: 7 }, (_, i) => new Date(year, month, startOfWeek + i).getDate());
+      } else if (view === 'day') {
+        daysToShow = [currentDate.getDate()];
+      }
+
+      daysToShow.forEach(day => {
+        const dayElement = document.createElement("div");
+        dayElement.classList.add("day");
+        dayElement.setAttribute("data-date", `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`);
+
+        // Add day number in the top left corner
+        const dayNumber = document.createElement("div");
+        dayNumber.classList.add("day-number");
+        dayNumber.textContent = day;
+        dayElement.appendChild(dayNumber);
+
+        // Highlight current day
+        const currentDateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        if (currentDateString === getFormattedDate(new Date())) {
+          dayElement.classList.add("current-day");
+        }
+
+        // Check for events on this day
+        eventsData.forEach(event => {
+          const eventElement = document.createElement("div");
+          eventElement.classList.add("event");
+          eventElement.textContent = event.event_name;
+          eventElement.onclick = () => showEventInfo(event);
+
+          if (!event.event_name.toLowerCase().includes(document.getElementById('search').value.toLowerCase())) {
+            eventElement.style.backgroundColor = 'grey';
+            eventElement.style.opacity = '0.5';
+          }
+
+          if (event.event_date === currentDateString) {
+            dayElement.appendChild(eventElement);
+          }
+        });
+
+        calendarElement.appendChild(dayElement);
+      });
+    }
+
+    function getFormattedDate(date) {
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    }
+
+    curentid = null;
+
+    function showEventInfo(event) {
+      const modal = document.getElementById("event-info-modal");
+      const title = document.getElementById("event-title");
+      const hostedBy = document.getElementById("event-hosted-by");
+      const dateTime = document.getElementById("event-date-time");
+      const description = document.getElementById("event-description");
+      const iframe = document.getElementById("stadium-iframe");
+      const getTicketsButton = document.getElementById("get-tickets");
+
+      title.textContent = event.event_name;
+      hostedBy.textContent = `Hosted by: ${event.hosted_by}`;
+      dateTime.textContent = `Date & Time: ${event.event_date} at ${event.event_time}`;
+      description.textContent = event.event_description;
+      iframe.src = `stadium.html?eventid=${event.event_id}`;
+
+       curentid = event.event_id; 
+      // Check if the event is in the future and show the "Get Tickets" button
+      const eventDateTime = new Date(`${event.event_date} ${event.event_time}`);
+      if (eventDateTime > currentDate) {
+        getTicketsButton.style.display = "block";
+      } else {
+        getTicketsButton.style.display = "none";
+      }
+
+      modal.style.display = "flex";
+    }
+
+    function hideEventInfo() {
+      const modal = document.getElementById("event-info-modal");
+      modal.style.display = "none";
+    }
+
+    function getTickets() {
+      
+     console.log(curentid);
+      window.location.href = `./selstadiu.html?eventid=${curentid}`;
+    }
+
+    function changeDate(offset) {
+      currentDate.setMonth(currentDate.getMonth() + offset);
+      createCalendar(currentDate.getFullYear(), currentDate.getMonth(), currentView);
+    }
+
+    function changeView(view) {
+      currentView = view;
+      createCalendar(currentDate.getFullYear(), currentDate.getMonth(), currentView);
+    }
+
+    function searchEvents(event) {
+      createCalendar(currentDate.getFullYear(), currentDate.getMonth(), currentView);
+    }
+
+    // Initialize calendar
+    createCalendar(currentDate.getFullYear(), currentDate.getMonth());
+  </script>
+</body>
+</html>

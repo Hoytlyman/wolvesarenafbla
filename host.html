@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host an Event Here</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .form-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+            box-sizing: border-box;
+        }
+        .form-container h1 {
+            margin-bottom: 1rem;
+            color: #333;
+            text-align: center;
+        }
+        .form-container p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 0.9rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        .form-group input[type="range"] {
+            padding: 0;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+            .form-group label {
+                font-size: 0.8rem;
+            }
+            .form-group input, .form-group textarea {
+                font-size: 0.9rem;
+            }
+            .submit-btn {
+                font-size: 0.9rem;
+                padding: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Host an Event at Wolves Arena!</h1>
+        <p>Hello, it looks like you want to host an event with us! Please provide the information below, including your email address, company name, and the preferred date for the event. Once you submit the form, our team will review your details and contact you promptly with a customized quote that will fit within your budget. Any and all events hosted support our community, so we thank you for considering us!</p>
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Company Name</label>
+                <input type="text" id="company" name="company" placeholder="Enter your company name" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="attendees">Expected Number of Attendees (0-3500):</label>
+                <input type="range" id="attendees" name="attendees" min="0" max="3500" step="100" oninput="this.nextElementSibling.value = this.value">
+                <output>1800</output>
+            </div>
+            <div class="form-group">
+                <label for="event-type">Type of Event</label>
+                <input type="text" id="event-type" name="event-type" placeholder="Enter the type of event" required>
+            </div>
+            <div class="form-group">
+                <label for="event-description">Short Description of Your Event</label>
+                <textarea id="event-description" name="event-description" placeholder="Provide a brief explanation of your event..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Get Quota</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .seatmap-container {
+      position: relative;
+      width: 90vw;
+      height: 90vw;
+      min-width: 100px;
+      min-height: 100px;
+      max-width: 300px;
+      max-height: 300px;
+      background-image: url('STADIUM.png');
+      background-size: cover;
+      background-position: center;
+      align-self: center;
+      padding: inherit;
+    }
+
+    .section {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      background-color: transparent;
+      border-radius: 5px;
+      transform-origin: center;
+    }
+
+    .section:hover::after {
+      content: attr(data-hover);
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      border-radius: 5px;
+      font-size: 10px;
+      z-index: 2;
+    }
+
+    .section.A { top: 5%; left: 30%; width: 40%; height: 25%; }
+    .section.B { top: 15%; left: 68%; width: 30%; height: 20%; }
+    .section.C { top: 38%; left: 70%; width: 30%; height: 20%; }
+    .section.D { top: 60%; left: 68%; width: 25%; height: 20%; }
+    .section.E { top: 65%; left: 30%; width: 40%; height: 25%; }
+    .section.F { top: 60%; left: 7%; width: 25%; height: 20%; }
+    .section.G { top: 38%; left: 0%; width: 30%; height: 20%; }
+    .section.H { top: 15%; left: 7%; width: 25%; height: 20%; }
+  </style>
+</head>
+<body>
+
+  <div class="seatmap-container">
+    <div class="section A" id="A" data-hover="Section A: 0/646 Seats taken"></div>
+    <div class="section B" id="B" data-hover="Section B: 0/368 Seats taken"></div>
+    <div class="section C" id="C" data-hover="Section C: 0/368 Seats taken"></div>
+    <div class="section D" id="D" data-hover="Section D: 0/368 Seats taken"></div>
+    <div class="section E" id="E" data-hover="Section E: 0/646 Seats taken"></div>
+    <div class="section F" id="F" data-hover="Section F: 0/368 Seats taken"></div>
+    <div class="section G" id="G" data-hover="Section G: 0/368 Seats taken"></div>
+    <div class="section H" id="H" data-hover="Section H: 0/368 Seats taken"></div>
+  </div>
+
+  <script>
+    // Event data
+    const eventsData = [
+      {
+        "event_id": "1",
+        "event_name": "Skyview vs Jacksonville",
+        "hosted_by": "Cache county school district",
+        "event_date": "2024-12-14",
+        "event_time": "5:00 PM",
+        "event_description": "The basketball game featuring the teams Skyview and Jacksonville!",
+        "seating": {
+          "A": { "seats": 543, "max_seats": 646 },
+          "B": { "seats": 127, "max_seats": 368 },
+          "C": { "seats": 368, "max_seats": 368 },
+          "D": { "seats": 48, "max_seats": 368 },
+          "E": { "seats": 487, "max_seats": 646 },
+          "F": { "seats": 263, "max_seats": 368 },
+          "G": { "seats": 136, "max_seats": 368 },
+          "H": { "seats": 259, "max_seats": 368 }
+        }
+      },
+      {
+        "event_id": "2",
+        "event_name": "Christmas Eve Concert",
+        "hosted_by": "SomeCompany inc.",
+        "event_date": "2024-12-24",
+        "event_time": "12:00 PM",
+        "event_description": "A concert featuring covers of popular singers such as Frank Sinatra, Michael Bublé and more!",
+        "seating": {
+          "A": { "seats": 100, "max_seats": 646 },
+          "B": { "seats": 120, "max_seats": 368 },
+          "C": { "seats": 80, "max_seats": 368 },
+          "D": { "seats": 90, "max_seats": 368 },
+          "E": { "seats": 110, "max_seats": 646 },
+          "F": { "seats": 95, "max_seats": 368 },
+          "G": { "seats": 70, "max_seats": 368 },
+          "H": { "seats": 60, "max_seats": 368 }
+        }
+      }
+    ];
+  
+    // Extract the event ID from the URL query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = urlParams.get('eventid');
+    
+    // Find the event data matching the eventId
+    const event = eventsData.find(e => e.event_id === eventId);
+  
+    if (event) {
+      console.log(`Found event: ${event.event_name}`);  // Debugging: Confirm event is found
+      
+      // Update the data-hover attributes based on the seating data
+      for (let section in event.seating) {
+        const sectionElement = document.getElementById(`${section.toUpperCase()}`);
+        if (sectionElement) {
+          const seatsTaken = event.seating[section].seats;
+          const maxSeats = event.seating[section].max_seats;
+          const dataHoverText = `Section ${section.toUpperCase().replace('_', ' ')}: ${seatsTaken}/${maxSeats} Seats taken`;
+          console.log(`Updating ${section} to: ${dataHoverText}`); // Debugging: Confirm data update
+          sectionElement.setAttribute('data-hover', dataHoverText);
+        }
+      }
+    } else {
+      // If the event is not found, display an error
+      alert('Event not found!');
+    }
+  </script>
+</body>
+</html>

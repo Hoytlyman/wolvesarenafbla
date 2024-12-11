@@ -1,0 +1,43 @@
+{
+    "event_id": "12345",
+    "event_name": "Annual Tech Conference",
+    "hosted_by": "Tech Innovators Inc.",
+    "event_date": "2024-12-15",
+    "event_time": "10:00 AM",
+    "event_description": "A conference showcasing the latest innovations in technology, featuring keynote speakers, panels, and workshops.",
+    "seating": {
+      "section_A": {
+        "seats": 100,
+        "max_seats": 150
+      },
+      "section_B": {
+        "seats": 120,
+        "max_seats": 150
+      },
+      "section_C": {
+        "seats": 80,
+        "max_seats": 120
+      },
+      "section_D": {
+        "seats": 90,
+        "max_seats": 120
+      },
+      "section_E": {
+        "seats": 110,
+        "max_seats": 150
+      },
+      "section_F": {
+        "seats": 95,
+        "max_seats": 130
+      },
+      "section_G": {
+        "seats": 70,
+        "max_seats": 100
+      },
+      "section_H": {
+        "seats": 60,
+        "max_seats": 80
+      }
+    }
+  }
+  
