@@ -349,8 +349,11 @@
     }
 
     window.onload = function() {
+
+      const url = new URL(window.location.href);
+    
         
-      updatePageFromHistory(page)
+      updatePageFromHistory(url.pathname)
 
         window.addEventListener('popstate', function(event) {
             if (event.state && event.state.page) {
