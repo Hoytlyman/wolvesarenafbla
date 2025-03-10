@@ -3,185 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Green Page</title>
+    <title>404 - Page Not Found</title>
     <style>
-        /* CSS for Dark Green Theme */
+        /* General styles - Adjust these to match your website's theme */
         body {
-            background-color: #1e272c; /* Dark background */
-            color: #dff9fb; /* Light text for contrast */
             font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            transition: background-color 0.3s ease; /* Smooth transition for background */
-        }
-
-        header {
-            background-color: #27ae60; /* Dark Green header */
-            color: #ecf0f1;
-            padding: 1rem;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-        }
-        
-        h1, h2, h3{
-            color:#2ecc71;
         }
 
-        nav {
-            background-color: #218c74; /* Dark Green navigation */
-            padding: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-            
-        }
-        
-        nav ul {
-            list-style:none;
-            padding:0;
-            margin:0;
-            display:flex;
-            justify-content:center;
-            gap:1em;
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
         }
 
-        nav a {
-            color: #ecf0f1;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+        h1 {
+            font-size: 4rem;
+            color: #e74c3c; /* Error color - adjust as needed */
+            margin-bottom: 10px;
         }
 
-        nav a:hover {
-            background-color: #1abc9c; /* Lighter green on hover */
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
         }
 
-        main {
-            padding: 2rem;
-            flex-grow: 1; /* Allow main to take up remaining space */
-            
-        }
-        
-        article{
-          background-color: rgba(39, 174, 96, 0.15);
-          padding:1em;
-          border-radius: 5px;
-          margin: 1em;
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        section {
-            margin-bottom: 2rem;
-        }
-
-        footer {
-            background-color: #27ae60; /* Dark Green footer */
-            color: #ecf0f1;
-            text-align: center;
-            padding: 1rem;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-        }
-
-        /* Buttons */
-        button {
-            background-color: #2ecc71; /* Green button */
+        .home-link {
+            display: inline-block;
+            background-color: #3498db; /* Primary color - adjust as needed */
             color: #fff;
-            border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 10px 20px;
             border-radius: 5px;
-            cursor: pointer;
+            text-decoration: none;
             transition: background-color 0.3s ease;
         }
 
-        button:hover {
-            background-color: #27ae60; /* Darker green on hover */
+        .home-link:hover {
+            background-color: #2980b9; /* Darker shade on hover */
         }
-        
-        input[type="text"], input[type="email"], textarea{
-          background-color: rgba(39, 174, 96, 0.1);
-          border: 1px solid #27ae60;
-          color:#dff9fb;
-          border-radius:5px;
-          padding:0.5em;
+        /* Optional - Add a background pattern */
+        /* body {
+           background-image: linear-gradient(to bottom right, #f0f0f0, #dcdcdc);
         }
-        
-        label{
-          display:block;
-          margin:0.5em 0;
+        */
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+            .container{
+                padding: 20px;
+            }
         }
-        
-        .form-group{
-          margin:1em 0;
+
+        @media (max-width: 480px) {
+          h1 {
+            font-size: 2.5rem;
+          }
+
+          h2{
+            font-size: 1.2rem;
+          }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>My Dark Green Website</h1>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <section>
-            <h2>Welcome</h2>
-            <article>
-              <p>This is a sample dark green website, demonstrating the application of a consistent color scheme using CSS. The page is designed to be visually appealing and user-friendly, with a focus on readability and a calm aesthetic.</p>
-            </article>
-            
-        </section>
-        <section>
-            <h2>Contact Us</h2>
-            <article>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message:</label>
-                        <textarea id="message" name="message" rows="4" required></textarea>
-                    </div>
-                    <button type="submit">Send Message</button>
-                </form>
-            </article>
-        </section>
-        
-        <section>
-            <h2>Another section</h2>
-            <article>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <button type="button" onclick="alert('Button Clicked!')">Click Me</button>
-            </article>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 My Dark Green Website</p>
-    </footer>
+    <div class="container">
+        <h1>404</h1>
+        <h2>Oops! Page Not Found</h2>
+        <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+       
+    </div>
 
     <script>
-        // JavaScript (for basic form handling)
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
 
-            // You would typically handle form submission with AJAX here
-            alert('Form submitted! (This is a placeholder)');
-            // Reset the form for demonstration purposes
-            document.getElementById("contactForm").reset();
-        });
     </script>
 </body>
 </html>
