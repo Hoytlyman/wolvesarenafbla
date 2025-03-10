@@ -85,11 +85,11 @@
     const eventsData = [
       {
         "event_id": "1",
-        "event_name": "Skyview vs Jacksonville",
-        "hosted_by": "Cache county school district",
-        "event_date": "2024-12-14",
-        "event_time": "5:00 PM",
-        "event_description": "The basketball game featuring the teams Skyview and Jacksonville!",
+                "event_name": "FBLA State Day 2",
+                "hosted_by": "FBLA Utah",
+                "event_date": "2025-3-11",
+                "event_time": "4:30 PM",
+                "event_description": "Day 2 of the fbla state competition.",
         "seating": {
           "A": { "seats": 543, "max_seats": 646 },
           "B": { "seats": 127, "max_seats": 368 },
@@ -103,11 +103,11 @@
       },
       {
         "event_id": "2",
-        "event_name": "Christmas Eve Concert",
-        "hosted_by": "SomeCompany inc.",
-        "event_date": "2024-12-24",
-        "event_time": "12:00 PM",
-        "event_description": "A concert featuring covers of popular singers such as Frank Sinatra, Michael Bublé and more!",
+    "event_name": "Basketball SV vs RGHS",
+    "hosted_by": "Cache county school district",
+    "event_date": "2025-3-24",
+    "event_time": "12:00 PM",
+    "event_description": "The basketball game featuring Skyview and Ridgeline HighSchool",
         "seating": {
           "A": { "seats": 100, "max_seats": 646 },
           "B": { "seats": 120, "max_seats": 368 },
@@ -121,29 +121,29 @@
       }
     ];
   
-    // Extract the event ID from the URL query parameter
+ 
     const urlParams = new URLSearchParams(window.location.search);
     const eventId = urlParams.get('eventid');
     
-    // Find the event data matching the eventId
+  
     const event = eventsData.find(e => e.event_id === eventId);
   
     if (event) {
-      console.log(`Found event: ${event.event_name}`);  // Debugging: Confirm event is found
+      console.log(`Found event: ${event.event_name}`);  
       
-      // Update the data-hover attributes based on the seating data
+  
       for (let section in event.seating) {
         const sectionElement = document.getElementById(`${section.toUpperCase()}`);
         if (sectionElement) {
           const seatsTaken = event.seating[section].seats;
           const maxSeats = event.seating[section].max_seats;
           const dataHoverText = `Section ${section.toUpperCase().replace('_', ' ')}: ${seatsTaken}/${maxSeats} Seats taken`;
-          console.log(`Updating ${section} to: ${dataHoverText}`); // Debugging: Confirm data update
+          console.log(`Updating ${section} to: ${dataHoverText}`); 
           sectionElement.setAttribute('data-hover', dataHoverText);
         }
       }
     } else {
-      // If the event is not found, display an error
+     
       alert('Event not found!');
     }
   </script>

@@ -7,45 +7,61 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #f9fafb;
-      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
       padding: 20px;
-      align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      box-sizing: border-box;
     }
 
     .content-container {
-      margin-top: 20px;
       display: flex;
-      flex-direction: column;
+      width: 100%;
+      align-self: center;
+      top: auto;
+      max-width: 1200px;
       gap: 20px;
+      box-sizing: border-box;
     }
 
-    @media (min-width: 768px) {
-      .content-container {
-        flex-direction: row;
-        align-items: flex-start;
-      }
-
-      
-    .selsec{
-      text-align: center;
-      position: relative;
-      margin: auto;
+    .seatmap-container {
+      display: block;
+      flex: 1;
+      max-width: calc(100% - 520px);
+      aspect-ratio: 1 / 1;
+      background-size: cover;
+      background-position: center;
       cursor: pointer;
-      margin-top: -10px;
-    }
+      align-items: center;
+      position: relative;
+      min-width: 200px;
     }
 
     .event-info {
-      flex: 1;
-      background: #fff;
+      background-color: #1e1e1e;
+      position: relative;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 500px;
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 20px;
     }
 
-    .event-info h2, .event-info p {
+    .event-info h2,
+    .event-info p {
       margin: 0 0 15px;
     }
 
@@ -53,7 +69,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 20px;
+      margin-top: auto;
     }
 
     .button-row button {
@@ -63,19 +79,22 @@
       border-radius: 8px;
       font-size: 14px;
       font-weight: bold;
+      background-color: #4CAF50;
+      color: #ffffff;
+      transition: background-color 0.3s;
     }
 
     .button-row .backBtn {
-      margin-top: auto;
       border: none;
       cursor: pointer;
       border-radius: 8px;
       font-size: 14px;
       font-weight: bold;
+      background-color: #2e2e2e;
     }
 
     .rmbtn {
-      background-color: #007bff;
+      background-color: #4CAF50;
       padding: 5px 8px;
       color: white;
       border: none;
@@ -87,33 +106,24 @@
 
     .rmbtn:hover {
       background-color: #ff0000;
-      padding: 5px 8px;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: bold;
     }
 
-
     .button-row .backBtn:hover {
-      border: none;
-      border-radius: 8px;
-      background-color: #a9a9a9;
-      font-size: 14px;
-      font-weight: bold;
+      background-color: #3e3e3e;
+    }
+
+    .button-row button:hover {
+      background-color: #388E3C;
     }
 
     .button-row #checkoutBtn {
-      background-color: #aaa;
-      color: white;
+      background-color: #3e3e3e;
+      color: #aaa;
       cursor: not-allowed;
-      margin-top: 10%;
     }
 
     .button-row #checkoutBtn.enabled {
-      background-color: #007bff;
+      background-color: #4CAF50;
       color: #fff;
       cursor: pointer;
     }
@@ -125,37 +135,16 @@
     }
 
     .warning {
-      color: red;
+      color: #FFC107;
       font-size: 14px;
       margin-top: 10px;
     }
 
     .disclaimer {
-      margin-top: 10px;
+      margin-top: auto;
       font-size: 12px;
-      color: #666;
-      float: right;
-    }
-
-    .selsec{
-      text-align: center;
-      position: relative;
-      margin: auto;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .seatmap-container {
-      flex: 1;
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      aspect-ratio: 1 / 1;
-      background-size: cover;
-      background-position: center;
-      cursor: pointer;
-      border-radius: 10px;
-     
+      color: #a9a9a9;
+      align-self: flex-end;
     }
 
     .section {
@@ -184,14 +173,157 @@
       z-index: 2;
     }
 
-    .section.A { top: 5%; left: 30%; width: 40%; height: 25%; }
-    .section.B { top: 15%; left: 68%; width: 30%; height: 20%; }
-    .section.C { top: 38%; left: 70%; width: 30%; height: 20%; }
-    .section.D { top: 60%; left: 68%; width: 25%; height: 20%; }
-    .section.E { top: 65%; left: 30%; width: 40%; height: 25%; }
-    .section.F { top: 60%; left: 7%; width: 25%; height: 20%; }
-    .section.G { top: 38%; left: 0%; width: 30%; height: 20%; }
-    .section.H { top: 15%; left: 7%; width: 25%; height: 20%; }
+    .section.A {
+      top: 5%;
+      left: 30%;
+      width: 40%;
+      height: 25%;
+    }
+
+    .section.B {
+      top: 15%;
+      left: 68%;
+      width: 30%;
+      height: 20%;
+    }
+
+    .section.C {
+      top: 38%;
+      left: 70%;
+      width: 30%;
+      height: 20%;
+    }
+
+    .section.D {
+      top: 60%;
+      left: 68%;
+      width: 25%;
+      height: 20%;
+    }
+
+    .section.E {
+      top: 65%;
+      left: 30%;
+      width: 40%;
+      height: 25%;
+    }
+
+    .section.F {
+      top: 60%;
+      left: 7%;
+      width: 25%;
+      height: 20%;
+    }
+
+    .section.G {
+      top: 38%;
+      left: 0%;
+      width: 30%;
+      height: 20%;
+    }
+
+    .section.H {
+      top: 15%;
+      left: 7%;
+      width: 25%;
+      height: 20%;
+    }
+
+    @media (max-width: 1000px) {
+      .content-container {
+        flex-direction: column;
+        
+      }
+
+      .event-info {
+        width: 100%;
+        position: relative;
+        border-radius: 20px;
+        top: 0;
+        bottom: 0;
+        max-width: 100%;
+        height: auto;
+        align-self: center;
+      }
+
+      .seatmap-container {
+        display: block;
+        flex: 1;
+        aspect-ratio: 1 / 1;
+        background-size: cover;
+        background-position: center;
+        align-self: center;
+        cursor: pointer;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        min-width: 300px;
+      }
+    }
+
+    .rmbtn.disabled {
+      background-color: #3e3e3e;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+
+ 
+    .selsec {
+      text-align: center;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      margin-top: 0;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    @media (max-width: 1000px) {
+      .selsec {
+        font-size: 16px;
+        top: 10px;
+        position: fixed;
+      }
+    }
+
+    .quantity-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #2e2e2e;
+      border-radius: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+
+    .quantity-container:hover {
+      background-color: #3e3e3e;
+    }
+
+    .quantity-input {
+      background: white;
+      border: none;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      
+      color: rgb(0, 0, 0);
+      width: 40px;
+    }
+
+    .quantity-input:focus {
+      outline: none;
+    }
+    
+    .rmbtn.red {
+      background-color: red;
+}
   </style>
 </head>
 <body>
@@ -210,7 +342,6 @@
     <div class="section H" id="H" data-hover="Section H: 0/368 Seats taken"></div>
   </div>
 
-  <!-- Event Info -->
   <div class="event-info">
     <h2 id="eventName">Event Name</h2>
     <p id="hostedBy">Hosted By</p>
@@ -226,68 +357,67 @@
   </div>
 </div>
 
+
 <script>
-  const eventsData = [
+const eventsData = [
     {
-      event_id: "1",
-      event_name: "Skyview vs Jacksonville",
-      hosted_by: "Cache county school district",
-      event_date: "2024-12-14",
-      event_time: "5:00 PM",
-      event_description: "The basketball game featuring the teams Skyview and Jacksonville!",
-      seating: {
-        "A": { seats: 543, max_seats: 646, price: 20 },
-        "B": { seats: 127, max_seats: 368, price: 15 },
-        "C": { seats: 368, max_seats: 368, price: 25 },
-        "D": { seats: 48, max_seats: 368, price: 30 },
-        "E": { seats: 487, max_seats: 646, price: 10 },
-        "F": { seats: 263, max_seats: 368, price: 18 },
-        "G": { seats: 136, max_seats: 368, price: 22 },
-        "H": { seats: 259, max_seats: 368, price: 28 }
-      }
+      "event_id": "1",
+                "event_name": "FBLA State Day 2",
+                "hosted_by": "FBLA Utah",
+                "event_date": "2025-3-11",
+                "event_time": "4:30 PM",
+                "event_description": "Day 2 of the fbla state competition.",
+        seating: {
+            "A": { seats: 543, max_seats: 646, price: 20 },
+            "B": { seats: 127, max_seats: 368, price: 15 },
+            "C": { seats: 368, max_seats: 368, price: 25 },
+            "D": { seats: 48, max_seats: 368, price: 30 },
+            "E": { seats: 487, max_seats: 646, price: 10 },
+            "F": { seats: 263, max_seats: 368, price: 18 },
+            "G": { seats: 136, max_seats: 368, price: 22 },
+            "H": { seats: 259, max_seats: 368, price: 28 }
+        }
     },
     {
-        event_id: "2",
-        event_name: "Christmas Eve Concert",
-        hosted_by: "SomeCompany inc.",
-        event_date: "2024-12-24",
-        event_time: "12:00 PM",
-        event_description: "A concert featuring covers of popular singers such as Frank Sinatra, Michael Bublé and more!",
+      "event_id": "2",
+    "event_name": "Basketball SV vs RGHS",
+    "hosted_by": "Cache county school district",
+    "event_date": "2025-3-24",
+    "event_time": "12:00 PM",
+    "event_description": "The basketball game featuring Skyview and Ridgeline HighSchool",
         seating: {
-          "A": { seats: 100, max_seats: 646, price: 20 },
-          "B": { seats: 120, max_seats: 368, price: 20 },
-          "C": { seats: 80, max_seats: 368, price: 20 },
-          "D": { seats: 90, max_seats: 368, price: 20 },
-          "E": { seats: 110, max_seats: 646, price: 20 },
-          "F": { seats: 95, max_seats: 368, price: 20 },
-          "G": { seats: 70, max_seats: 368, price: 20 },
-          "H": { seats: 60, max_seats: 368, price: 20 }
+            "A": { seats: 100, max_seats: 646, price: 20 },
+            "B": { seats: 120, max_seats: 368, price: 20 },
+            "C": { seats: 80, max_seats: 368, price: 20 },
+            "D": { seats: 90, max_seats: 368, price: 20 },
+            "E": { seats: 110, max_seats: 646, price: 20 },
+            "F": { seats: 95, max_seats: 368, price: 20 },
+            "G": { seats: 70, max_seats: 368, price: 20 },
+            "H": { seats: 60, max_seats: 368, price: 20 }
         }
-      }
-  ];
+    }
+];
 
-  // Extract event ID from URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const eventId = urlParams.get('eventid');
+const urlParams = new URLSearchParams(window.location.search);
+const eventId = urlParams.get('eventid');
 
-  let selectedSection = null;
-  let selectedQuantity = 1;
+let selectedSections = [];
+let selectedSection = null;
+let isAddingSection = false;
+const seatmap = document.getElementById('seatmap');
+const selectedSectionContainer = document.getElementById('selectedSectionContainer')
 
 
-  
-
-  // Function to get event data by event ID
-  function getEventData(eventId) {
+function getEventData(eventId) {
     return eventsData.find(event => event.event_id === eventId);
-  }
+}
 
-  function Back(){
-     window.location.href = `./events.html`
-  }
+function Back() {
+    window.location.href = `./events.html`
+}
 
-  const event = getEventData(eventId);
-  if (event) {
-    // Update event info based on event data
+const event = getEventData(eventId);
+if (event) {
     document.getElementById('eventName').innerText = event.event_name;
     document.getElementById('hostedBy').innerText = `Hosted by: ${event.hosted_by}`;
     document.getElementById('eventDescription').innerText = event.event_description;
@@ -296,135 +426,373 @@
     for (let section in event.seating) {
         const sectionElement = document.getElementById(`${section.toUpperCase()}`);
         if (sectionElement) {
-          const seatsTaken = event.seating[section].seats;
-          const maxSeats = event.seating[section].max_seats;
-          const dataHoverText = `Section ${section.toUpperCase()}: ${seatsTaken}/${maxSeats} Seats taken`;
-          console.log(`Updating ${section} to: ${dataHoverText}`); // Debugging: Confirm data update
-          sectionElement.setAttribute('data-hover', dataHoverText);
+            const seatsTaken = event.seating[section].seats;
+            const maxSeats = event.seating[section].max_seats;
+            const dataHoverText = `Section ${section.toUpperCase()}: ${seatsTaken}/${maxSeats} Seats taken`;
+            sectionElement.setAttribute('data-hover', dataHoverText);
         }
-      }
-  }
+    }
+}
 
-  // Initialize seat map
-  function updateSeatmap() {
+function updateSeatmap() {
     const seating = event.seating;
     Object.keys(seating).forEach(sectionId => {
-      const section = seating[sectionId];
-      const sectionElement = document.getElementById(sectionId);
-      sectionElement.textContent = ``;
-      sectionElement.onclick = () => selectSection(sectionId);
-
-      // Dynamically update the title attribute to show seat availability
-      const availableSeats = section.max_seats - section.seats;
-      sectionElement.title = `Section ${sectionId}: ${availableSeats} / ${section.max_seats} Seats available`;
+        const section = seating[sectionId];
+        const sectionElement = document.getElementById(sectionId);
+        sectionElement.textContent = ``;
+        sectionElement.onclick = () => selectSection(sectionId);
+        const availableSeats = section.max_seats - section.seats;
+        sectionElement.title = `Section ${sectionId}: ${availableSeats} / ${section.max_seats} Seats available`;
     });
-  }
+}
 
-  // Handle selecting a section
-  function selectSection(sectionId) {
-    
+
+function selectSection(sectionId) {
+
     const sectionData = event.seating[sectionId];
-    selectedSection = sectionId;
-    seatmap.style.backgroundImage = `url('Stadium/${sectionId}.png')`;
-    
-    selectedSectionContainer.innerHTML = `
-      <div>
-        Section ${sectionId} - Seats Available: ${sectionData.max_seats - sectionData.seats}... Buy 
-        <input 
-          type="number" 
-          id="quantityInput" 
-          min="1" 
-          max="${sectionData.max_seats - sectionData.seats}" 
-          value="1"
-          oninput="updateQuantity(this.value)"
-        />
-         Tickets
-        <button class="rmbtn" onclick="deselectSection()">Remove</button>
-      </div>
-      <p class="warning" id="warningMessage"></p>
-    `;
+    const existingSectionIndex = selectedSections.findIndex(
+        (s) => s.sectionId === sectionId
+    );
 
-    updateQuantity(1);
-
-    const sectionData1 = event.seating[selectedSection];
-    const availableSeats = sectionData1.max_seats - sectionData1.seats;
-    if (selectedQuantity > availableSeats || selectedQuantity == 0|| selectedQuantity <= 0) {
-      document.getElementById("warningMessage").innerText = "Not enough seating available!";
-      const checkoutButton = document.getElementById('checkoutBtn');
-      checkoutButton.disabled = true;
-      checkoutButton.classList.toggle("enabled", false);
-    } else {
-      
-      checkoutButton.disabled = false;
-      checkoutButton.classList.toggle("enabled", true);
+    if (selectedSections.length === 0 && !isAddingSection) {
+        selectedSections.push({
+            sectionId: sectionId,
+            quantity: 1,
+            price: sectionData.price
+        });
+        
+        updateSelectedSectionDisplay();
+        updateSeatmapImage(sectionId);
+        updateSubtotal();
+        updateCheckoutButton();
+        return;
     }
+
+    if (!isAddingSection) {
+        return;
+    }
+
+
+    if (isAddingSection) {
+        if (selectedSections.length >= 8) {
+            alert("Maximum number of sections reached (8).");
+            return;
+        }
+        selectedSection = sectionId;
+        if (existingSectionIndex === -1) {
+            selectedSections.push({
+                sectionId: sectionId,
+                quantity: 1,
+                price: sectionData.price,
+            });
+        }
+        isAddingSection = false;
+        updateAddSectionButton();
+    } else {
+        if (selectedSection === null && selectedSections.length > 0) {
+            addNewSection();
+            return;
+        }
+        selectedSection = sectionId;
+        if (existingSectionIndex !== -1) {
+            const existingSection = selectedSections[existingSectionIndex];
+            const availableSeats = sectionData.max_seats - sectionData.seats;
+
+            if (existingSection.quantity + 1 > availableSeats) {
+                alert("Not enough seating available in this section!")
+                return;
+            }
+            else {
+                existingSection.quantity += 1;
+            }
+        } else {
+            selectedSections.push({
+                sectionId: sectionId,
+                quantity: 1,
+                price: sectionData.price
+            });
+        }
+    }
+
     
+    updateSelectedSectionDisplay();
+    updateSeatmapImage(selectedSection);
     updateSubtotal();
     updateCheckoutButton();
-  }
+}
 
-  // Deselect the selected section
-  function deselectSection() {
-    selectedSection = null;
-    seatmap.style.backgroundImage = `url('Stadium.png')`;
+function deselectSection(sectionId) {
+    const index = selectedSections.findIndex((s) => s.sectionId === sectionId);
+    const isCurrentlySelected = selectedSection === sectionId;
+    if (index !== -1) {
+        selectedSections.splice(index, 1);
+
+        if (isCurrentlySelected) {
+            if (selectedSections.length > 0) {
+                 selectedSection = selectedSections[0].sectionId
+                 seatmap.style.backgroundImage = `url('${selectedSection}.png')`;
+            } else {
+              seatmap.style.backgroundImage = `url('STADIUM.png')`;
+                selectedSection = null;
+            }
+        } else {
+          if (selectedSections.length > 0 && selectedSection)
+          {
+            seatmap.style.backgroundImage = `url('${selectedSection}.png')`;
+          }
+           else if (selectedSections.length > 0)
+           {
+              seatmap.style.backgroundImage = `url('${selectedSections[0].sectionId}.png')`;
+           }else
+           {
+            seatmap.style.backgroundImage = `url('STADIUM.png')`;
+           }
+        }
+       
+       
+        updateSelectedSectionDisplay();
+        updateSubtotal();
+        updateCheckoutButton();
+    }
+}
+
+function updateQuantity(value, sectionId) {
+    const sectionIndex = selectedSections.findIndex(s => s.sectionId === sectionId);
+
+    if (sectionIndex !== -1) {
+        const sectionData = event.seating[sectionId];
+        const availableSeats = sectionData.max_seats - sectionData.seats;
+        const section = selectedSections[sectionIndex];
+        const num = parseInt(value);
+
+        section.quantity = value === "" ? 0 : num;
+        if (section.quantity > availableSeats || section.quantity === 0) {
+            document.getElementById('warningMessage').innerText = "Not enough seating available!";
+        } else {
+            document.getElementById('warningMessage').innerText = "";
+        }
+
+        updateSubtotal();
+        updateCheckoutButton();
+        checkAllAvailableSeats();
+    }
+}
+
+function updateSelectedSectionDisplay() {
     selectedSectionContainer.innerHTML = "";
-    
-    updateSubtotal();
-    updateCheckoutButton();
-  }
 
-  // Update quantity of selected tickets
-  function updateQuantity(value) {
-    const sectionData = event.seating[selectedSection];
-    const availableSeats = sectionData.max_seats - sectionData.seats;
-    if (value > availableSeats || value == 0|| value <= 0) {
-      document.getElementById("warningMessage").innerText = "Not enough seating available!";
-      const checkoutButton = document.getElementById('checkoutBtn');
-      checkoutButton.disabled = true;
-      checkoutButton.classList.toggle("enabled", false);
+    if (selectedSections.length === 0) {
+        seatmap.style.backgroundImage = `url('STADIUM.png')`;
+    }
+
+    const selectSectionText = document.createElement("p");
+    selectSectionText.classList.add("warning");
+    selectSectionText.id = "selectSectionText";
+
+    if (isAddingSection) {
+        selectSectionText.textContent = "Select " + (selectedSections.length + 1) + getOrdinalSuffix(selectedSections.length + 1) + " Section"
+    }
+    else {
+        selectSectionText.textContent = ""
+    }
+
+    selectedSectionContainer.appendChild(selectSectionText)
+
+    selectedSections.forEach((section) => {
+        const sectionData = event.seating[section.sectionId];
+        const availableSeats = sectionData.max_seats - sectionData.seats;
+
+        const sectionDiv = document.createElement("div");
+        sectionDiv.classList.add('quantity-container');
+        sectionDiv.onclick = () => updateSeatmapImage(section.sectionId)
+        sectionDiv.innerHTML = `
+        Section ${section.sectionId} - Seats Available: ${availableSeats}... Buy
+        <input
+            type="number"
+            id="quantityInput-${section.sectionId}"
+            min="0"
+            max="${availableSeats}"
+            value="${section.quantity}"
+            class="quantity-input"
+            oninput="updateQuantity(this.value, '${section.sectionId}')"
+        />
+        Tickets
+        <button class="rmbtn" onclick="deselectSection('${section.sectionId}')">Remove</button>
+    `;
+        selectedSectionContainer.appendChild(sectionDiv);
+        const quantityInput = document.getElementById(`quantityInput-${section.sectionId}`);
+
+        quantityInput.addEventListener('input', () => {
+            updateCheckoutButton();
+            checkAllAvailableSeats();
+        });
+    });
+
+    const addSectionDiv = document.createElement("div");
+    addSectionDiv.id = "addSectionDiv";
+    addSectionDiv.innerHTML = `
+      <button class="rmbtn" id="addSectionBtn" onclick="addNewSection()">Add Section</button>
+    `;
+    selectedSectionContainer.appendChild(addSectionDiv);
+    const warning = document.createElement('p');
+    warning.classList.add('warning');
+    warning.id = "warningMessage";
+    document.getElementById("addSectionDiv").appendChild(warning)
+
+    updateAddSectionButton();
+    checkAllAvailableSeats();
+}
+
+function addNewSection() {
+    const addSectionButton = document.getElementById('addSectionBtn');
+    isAddingSection = !isAddingSection;
+
+    updateAddSectionButton();
+}
+
+function updateAddSectionButton() {
+    const addSectionButton = document.getElementById('addSectionBtn');
+    const selectSectionText = document.getElementById('selectSectionText')
+    if (selectedSections.length === 0) {
+        isAddingSection = true;
+
+    }
+    if (isAddingSection) {
+        addSectionButton.textContent = "Cancel Add";
+        addSectionButton.classList.add("red");
+        selectSectionText.textContent = "Select " + (selectedSections.length + 1) + getOrdinalSuffix(selectedSections.length + 1) + " Section"
+
+        if (selectedSections.length >= 8) {
+            addSectionButton.classList.add('disabled');
+            addSectionButton.disabled = true;
+            selectSectionText.textContent = "Max sections selected"
+        } else {
+            addSectionButton.classList.remove('disabled');
+            addSectionButton.disabled = false;
+        }
     } else {
-      const checkoutButton = document.getElementById('checkoutBtn');
-      document.getElementById("warningMessage").innerText = "";
-      checkoutButton.disabled = false;
-      checkoutButton.classList.toggle("enabled", true);
+        addSectionButton.textContent = "Add Section";
+        addSectionButton.classList.remove("red");
+        selectSectionText.textContent = ""
+        if (selectedSections.length >= 8) {
+            addSectionButton.classList.add('disabled');
+            addSectionButton.disabled = true;
+            selectSectionText.textContent = "Max sections selected"
+        } else {
+            addSectionButton.classList.remove('disabled');
+            addSectionButton.disabled = false;
+        }
     }
-    selectedQuantity = value;
-    updateSubtotal();
-  }
+}
 
-  // Update the subtotal based on selected quantity and section price
-  function updateSubtotal() {
-    const sectionData = event.seating[selectedSection];
-    const availableSeats = sectionData.max_seats - sectionData.seats;
-    if (selectedQuantity > availableSeats || selectedQuantity == 0|| selectedQuantity <= 0) {
-      const subtotalElement = document.getElementById('subtotal');
-      subtotalElement.textContent = `Subtotal: $0`;
-      checkoutButton.disabled = true;
-      checkoutButton.classList.toggle("enabled", false);
+function getOrdinalSuffix(number) {
+    if (number >= 11 && number <= 13) {
+        return "th";
     }
-    else{
+    switch (number % 10) {
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
+    }
+}
+
+function checkAllAvailableSeats() {
+    let hasNoAvailableSeats = false;
+    let hasNoSelection = false;
+    if (selectedSections.length === 0) {
+        hasNoSelection = true;
+    }
+
+    for (let i = 0; i < selectedSections.length; i++) {
+        const sectionData = event.seating[selectedSections[i].sectionId];
+        const availableSeats = sectionData.max_seats - sectionData.seats;
+        if (selectedSections[i].quantity > availableSeats || selectedSections[i].quantity === 0) {
+            hasNoAvailableSeats = true
+        }
+
+    }
+    if (hasNoAvailableSeats || hasNoSelection) {
+        document.getElementById('warningMessage').innerText = "Not enough seating available!";
+    }
+    else {
+        document.getElementById('warningMessage').innerText = "";
+    }
+}
+
+
+function updateSubtotal() {
     const subtotalElement = document.getElementById('subtotal');
     subtotalElement.textContent = `Subtotal: $0`;
-    if (selectedSection) {
-      const price = event.seating[selectedSection].price;
-      subtotalElement.textContent = `Subtotal: $${price * selectedQuantity}`;
-    } else {
-      subtotalElement.textContent = `Subtotal: $0`;
-    }
-    }
-  }
+    let totalCost = 0;
+    selectedSections.forEach(section => {
+        const sectionData = event.seating[section.sectionId];
+        totalCost += section.price * section.quantity;
+    });
+    subtotalElement.textContent = `Subtotal: $${totalCost}`;
+}
 
-  // Enable or disable the checkout button
-  function updateCheckoutButton() {
+function updateCheckoutButton() {
     const checkoutButton = document.getElementById('checkoutBtn');
-    checkoutButton.disabled = !selectedSection;
-    checkoutButton.classList.toggle("enabled", !!selectedSection);
+    let hasValidSelection = false;
+    let hasValidSeats = true;
 
-  
-  }
+    for (let i = 0; i < selectedSections.length; i++) {
+        if (selectedSections[i].quantity > 0) {
+            hasValidSelection = true;
+        }
+        const sectionData = event.seating[selectedSections[i].sectionId];
+        const availableSeats = sectionData.max_seats - sectionData.seats;
+        if (selectedSections[i].quantity > availableSeats) {
+            hasValidSeats = false;
+        }
+        if (selectedSections[i].quantity === 0) {
+            hasValidSeats = false;
+        }
+    }
 
- 
-  updateSeatmap();
+    checkoutButton.disabled = !hasValidSelection || !hasValidSeats;
+    checkoutButton.classList.toggle("enabled", hasValidSelection && hasValidSeats);
+}
+
+function updateSeatmapImage(sectionId) {
+    if (sectionId === null || sectionId === '') {
+        seatmap.style.backgroundImage = `url('STADIUM.png')`;
+        return;
+    }
+
+    const isSectionInCart = Array.from(selectedSectionContainer.querySelectorAll('.quantity-container')).some(container => {
+        return container.textContent.includes(`Section ${sectionId}`);
+    });
+
+    if (isSectionInCart) {
+        seatmap.style.backgroundImage = `url('Stadium/${sectionId}.png')`;
+    } else {
+       
+        if (selectedSections.length > 0) {
+            let found = false;
+            for (let i = 0; i < selectedSections.length; i++) {
+                const nextSectionId = selectedSections[i].sectionId;
+                 const isNextSectionInCart = Array.from(selectedSectionContainer.querySelectorAll('.quantity-container')).some(container => {
+                   return container.textContent.includes(`Section ${nextSectionId}`);
+                });
+                if (isNextSectionInCart) {
+                    seatmap.style.backgroundImage = `url('Stadium/${nextSectionId}.png')`;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                seatmap.style.backgroundImage = `url('STADIUM.png')`;
+            }
+        } else {
+
+            seatmap.style.backgroundImage = `url('STADIUM.png')`;
+        }
+    }
+}
+
+updateSeatmap();
 </script>
 </body>
 </html>
