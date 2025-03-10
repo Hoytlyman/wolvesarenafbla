@@ -251,19 +251,19 @@
     </div>
     
     <div class="nav-items" id="navItems">
-        <div id="b0" class="menu-item active" onclick="loadPage('./home.html', '/home')">
+        <div id="b0" class="menu-item active" onclick="loadPage('./main.html', '/home')">
            <img src="home.svg" alt="Home">
             <span>Home</span>
         </div>
-        <div id="b1" class="menu-item" onclick="loadPage('./events.html', '/events')">
+        <div id="b1" class="menu-item" onclick="loadPage('./events.html', '/calendar')">
             <img src="cal.svg" alt="Events">
             <span>Events</span>
         </div>
-        <div id="b2" class="menu-item" onclick="loadPage('./host.html', '/host')">
+        <div id="b2" class="menu-item" onclick="loadPage('./host.html', '/make')">
             <img src="door.svg" alt="Host event">
             <span>Host event</span>
         </div>
-        <div id="b4" class="menu-item" onclick="loadPage('./info.html', '/info')">
+        <div id="b4" class="menu-item" onclick="loadPage('./info.html', '/information')">
             <img src="qu.svg" alt="Information">
             <span>Information</span>
         </div>
@@ -271,7 +271,7 @@
   </div>
 
   <div class="content" id="content">
-    <iframe id="contentFrame" src="home.html"></iframe>
+    <iframe id="contentFrame" src="main.html"></iframe>
   </div>
 
   <script>
@@ -300,13 +300,13 @@
         document.querySelectorAll('.menu-item').forEach(item => {
             item.classList.remove('active');
         });
-        loadPage('./home.html', '/home');
+        loadPage('./main.html', '/home');
         document.getElementById('b0').classList.add('active');
     }
 
     window.addEventListener('message', function(event) {
             if (event.data.type === 'loadPage') {
-              page = '/events'
+              page = '/calendar'
               url = './events.html';
               const iframe = document.getElementById('contentFrame');
               iframe.contentWindow.history.replaceState(null, '', url);
@@ -323,18 +323,21 @@
     function updatePageFromHistory(page){
         let url = '';
         if (page === '/home' || page === '' || page === '/') { 
-            url = './home.html';
+            url = './main.html';
             page = '/home' 
             document.getElementById('b0').classList.add('active');
-        } else if (page === '/events') {
+        } else if (page === '/calendar') {
             url = './events.html';
             document.getElementById('b1').classList.add('active');
-        } else if (page === '/host') {
+        } else if (page === '/make') {
             url = './host.html';
             document.getElementById('b2').classList.add('active');
-        } else if (page === '/info') {
+        } else if (page === '/information') {
             url = './info.html';
             document.getElementById('b4').classList.add('active');
+        }
+        else{
+          window.location.href = 'https://fbla.igniteapps.org/404.html';
         }
 
         if (url) {
@@ -346,7 +349,8 @@
     }
 
     window.onload = function() {
-        document.getElementById('b0').classList.add('active');
+        
+      updatePageFromHistory(page)
 
         window.addEventListener('popstate', function(event) {
             if (event.state && event.state.page) {
